@@ -5,6 +5,7 @@ import { getSession } from "next-auth/react";
 import { GetServerSideProps } from "next";
 import { Session } from "next-auth";
 import LogIn from "@/components/LogIn";
+import Feed from "@/components/Feed";
 
 type HomePageProps = {
   session: Session;
@@ -27,6 +28,8 @@ export default function Home({ session }: HomePageProps) {
         <Sidebar />
 
         {/* Feed/Posts */}
+        <Feed />
+
         {/* Right Sidebar */}
       </main>
     </>
