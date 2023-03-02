@@ -12,18 +12,47 @@ const RightSidebar: React.FC<RightSidebarProps> = () => {
       <div className="flex items-center text-gray-600">
         <p className="flex text-lg font-semibold flex-grow">Contacts</p>
         <div className="flex space-x-1 px-2">
-          <div className="rounded-full p-2 hover:bg-gray-200 cursor-pointer">
+          <div className="rounded-full p-2 hover:bg-gray-300 cursor-pointer">
             <RiVideoAddFill size={20} />
           </div>
-          <div className="rounded-full p-2 hover:bg-gray-200 cursor-pointer">
+          <div className="rounded-full p-2 hover:bg-gray-300 cursor-pointer">
             <BiSearch size={20} />
           </div>
-          <div className="rounded-full p-2 hover:bg-gray-200 cursor-pointer">
+          <div className="rounded-full p-2 hover:bg-gray-300 cursor-pointer">
             <CgMoreAlt size={20} />
           </div>
         </div>
       </div>
-      <Contacts />
+      <Contacts
+        src="https://www.freepnglogos.com/uploads/facebook-logo-icon/facebook-logo-icon-file-facebook-icon-svg-wikimedia-commons-4.png"
+        name="Nirmalya Nayak"
+        online={true}
+      />
+      <Contacts
+        src="https://www.freepnglogos.com/uploads/facebook-logo-icon/facebook-logo-icon-file-facebook-icon-svg-wikimedia-commons-4.png"
+        name="Kaibalya Nayak"
+        online={true}
+      />
+      <Contacts
+        src="https://www.freepnglogos.com/uploads/facebook-logo-icon/facebook-logo-icon-file-facebook-icon-svg-wikimedia-commons-4.png"
+        name="Laxmipriya Nayak"
+        online={false}
+      />
+      <Contacts
+        src="https://www.freepnglogos.com/uploads/facebook-logo-icon/facebook-logo-icon-file-facebook-icon-svg-wikimedia-commons-4.png"
+        name="Manoranjan Nayak"
+        online={true}
+      />
+      <Contacts
+        src="https://www.freepnglogos.com/uploads/facebook-logo-icon/facebook-logo-icon-file-facebook-icon-svg-wikimedia-commons-4.png"
+        name="Pitambar Nayak"
+        online={false}
+      />
+      <Contacts
+        src="https://www.freepnglogos.com/uploads/facebook-logo-icon/facebook-logo-icon-file-facebook-icon-svg-wikimedia-commons-4.png"
+        name="Bauri Dei"
+        online={false}
+      />
     </div>
   );
 };
