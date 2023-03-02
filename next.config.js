@@ -2,7 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["www.freepnglogos.com", "lh3.googleusercontent.com"]
+    domains: [
+      "www.freepnglogos.com",
+      "lh3.googleusercontent.com",
+      "thumbs.dreamstime.com"
+    ]
   }
 };
 

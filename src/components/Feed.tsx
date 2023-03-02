@@ -1,5 +1,6 @@
 import React from "react";
 import CreatePost from "./CreatePost";
+import Posts from "./Posts";
 
 type FeedProps = {};
 
@@ -11,6 +12,7 @@ const Feed: React.FC<FeedProps> = () => {
         <CreatePost />
 
         {/* Posts */}
+        <Posts />
       </div>
     </div>
   );
