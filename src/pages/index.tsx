@@ -6,6 +6,7 @@ import { GetServerSideProps } from "next";
 import { Session } from "next-auth";
 import LogIn from "@/components/LogIn";
 import Feed from "@/components/Feed";
+import RightSidebar from "@/components/RightSidebar";
 
 type HomePageProps = {
   session: Session;
@@ -31,6 +32,7 @@ export default function Home({ session }: HomePageProps) {
         <Feed />
 
         {/* Right Sidebar */}
+        <RightSidebar />
       </main>
     </>
   );
