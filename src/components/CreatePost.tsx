@@ -1,19 +1,59 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { HiOutlineVideoCamera } from "react-icons/hi";
 import { IoMdPhotos } from "react-icons/io";
+import { RiDeleteBin6Line } from "react-icons/ri";
 import { BsEmojiSmile } from "react-icons/bs";
+import axios from "axios";
 
 type CreatePostProps = {};
+
+const FB_CLONE_ENDPOINT = process.env.FB_CLONE_ENDPOINT!;
 
 const CreatePost: React.FC<CreatePostProps> = () => {
   const { data: session } = useSession();
   const inputRef = useRef<HTMLInputElement>(null);
   const hiddenFileInput = useRef<HTMLInputElement>(null);
+  const [imageToPost, setImageToPost] = useState<string>("");
 
   const handleClick = () => {
     hiddenFileInput.current!.click();
+  };
+
+  const addImageToPost = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const reader = new FileReader();
+    if (event.target.files![0]) {
+      reader.readAsDataURL(event.target.files![0]);
+      reader.onload = (event) => {
+        setImageToPost(event.target?.result as string);
+      };
+    }
+  };
+
+  const removeImage = () => setImageToPost("");
+
+  const handleSubmit = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.preventDefault();
+    if (!inputRef.current?.value) return;
+    const formData = new FormData();
+    formData.append("image", imageToPost);
+    formData.append("post", inputRef.current.value);
+    formData.append("name", session!.user!.name!);
+    formData.append("email", session!.user!.email!);
+    formData.append("profilePic", session!.user!.image!);
+
+    axios
+      .post(FB_CLONE_ENDPOINT, formData, {
+        headers: { Accept: "application/json" }
+      })
+      .then((response) => {
+        inputRef.current!.value = "";
+        removeImage();
+      })
+      .catch((error) => console.error(error));
   };
 
   return (
@@ -33,9 +73,19 @@ const CreatePost: React.FC<CreatePostProps> = () => {
             ref={inputRef}
             placeholder={`What's on Your Mind, ${session?.user?.name}?`}
           ></input>
-          <button hidden></button>
+          <button hidden onClick={handleSubmit}></button>
         </form>
       </div>
+      {imageToPost && (
+        <div className="flex items-center px-4 space-x-4 filter hover:brightness-110 transition duration-150 cursor-pointer">
+          <img src={imageToPost} className="h-10 object-contain" />
+          <RiDeleteBin6Line
+            onClick={removeImage}
+            className="h-8 hover:text-red-600"
+            title="Remove Selected Photo!"
+          />
+        </div>
+      )}
       <div className="flex justify-evenly py-2">
         <div className="flex items-center p-1 space-x-1 flex-grow justify-center hover:bg-gray-200 rounded-md cursor-pointer">
           <HiOutlineVideoCamera size={20} className="text-red-500" />
@@ -47,7 +97,13 @@ const CreatePost: React.FC<CreatePostProps> = () => {
         >
           <IoMdPhotos size={20} className="text-green-500" />
           <p className="font-semibold text-gray-600">Photo/Video</p>
-          <input type="file" hidden accept="image/*" ref={hiddenFileInput} />
+          <input
+            onChange={addImageToPost}
+            type="file"
+            hidden
+            accept="image/*"
+            ref={hiddenFileInput}
+          />
         </div>
         <div className="flex items-center p-1 space-x-1 flex-grow justify-center hover:bg-gray-200 rounded-md cursor-pointer">
           <BsEmojiSmile size={20} className="text-yellow-500" />
