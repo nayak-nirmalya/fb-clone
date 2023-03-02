@@ -16,7 +16,7 @@ const LogIn: React.FC<LogInProps> = () => {
       </Head>
       <div className="flex flex-col items-center mx-auto mt-16">
         <Image
-          src={"/googleLogo.jpg"}
+          src={"/Google-logo.png"}
           priority
           width={240}
           height={240}
