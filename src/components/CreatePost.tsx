@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { HiOutlineVideoCamera } from "react-icons/hi";
@@ -9,6 +9,12 @@ type CreatePostProps = {};
 
 const CreatePost: React.FC<CreatePostProps> = () => {
   const { data: session } = useSession();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const hiddenFileInput = useRef<HTMLInputElement>(null);
+
+  const handleClick = () => {
+    hiddenFileInput.current!.click();
+  };
 
   return (
     <div className="bg-white rounded-md shadow-md text-gray-500 p-2">
@@ -24,6 +30,7 @@ const CreatePost: React.FC<CreatePostProps> = () => {
           <input
             className="rounded-full h-12 flex-grow focus:outline-none font-medium bg-gray-200 px-4"
             type="text"
+            ref={inputRef}
             placeholder={`What's on Your Mind, ${session?.user?.name}?`}
           ></input>
           <button hidden></button>
@@ -34,9 +41,13 @@ const CreatePost: React.FC<CreatePostProps> = () => {
           <HiOutlineVideoCamera size={20} className="text-red-500" />
           <p className="font-semibold text-gray-600">Live Video</p>
         </div>
-        <div className="flex items-center p-1 space-x-1 flex-grow justify-center hover:bg-gray-200 rounded-md cursor-pointer">
+        <div
+          onClick={handleClick}
+          className="flex items-center p-1 space-x-1 flex-grow justify-center hover:bg-gray-200 rounded-md cursor-pointer"
+        >
           <IoMdPhotos size={20} className="text-green-500" />
           <p className="font-semibold text-gray-600">Photo/Video</p>
+          <input type="file" hidden accept="image/*" ref={hiddenFileInput} />
         </div>
         <div className="flex items-center p-1 space-x-1 flex-grow justify-center hover:bg-gray-200 rounded-md cursor-pointer">
           <BsEmojiSmile size={20} className="text-yellow-500" />
