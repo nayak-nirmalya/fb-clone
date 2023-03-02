@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { signOut } from "next-auth/react";
 import { HiOutlineSearch, HiOutlineHome } from "react-icons/hi";
 import { RiFlag2Line } from "react-icons/ri";
 import { MdOutlineOndemandVideo, MdOutlineExpandMore } from "react-icons/md";
@@ -59,10 +60,11 @@ const Header: React.FC<HeaderProps> = () => {
       {/* Right */}
       <div className="flex items-center justify-end min-w-fit space-x-2">
         <Image
+          onClick={() => signOut()}
           src={session?.user?.image!}
           width={40}
           height={40}
-          className="rounded-full"
+          className="rounded-full cursor-pointer"
           alt="Facebook Symbol, Facebook Logos Within A White Square"
         />
         <p className="hidden xl:inline-flex font-semibold text-sm whitespace-nowrap p-3 max-w-xs">

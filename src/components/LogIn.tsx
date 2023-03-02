@@ -14,7 +14,7 @@ const LogIn: React.FC<LogInProps> = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="flex flex-col items-center mx-auto mt-16">
+      <div className="flex flex-col items-center mx-auto mt-32">
         <Image
           src={"/Google-logo.png"}
           priority
@@ -25,7 +25,7 @@ const LogIn: React.FC<LogInProps> = () => {
         />
         <a
           onClick={() => signIn()}
-          className="px-20 py-4 z-10 text-2xl cursor-pointer mt-8 bg-blue-500 rounded-md text-white"
+          className="px-20 py-4 z-10 text-2xl cursor-pointer bg-blue-500 rounded-md text-white"
         >
           LogIn
         </a>
