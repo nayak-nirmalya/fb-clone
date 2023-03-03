@@ -1,17 +1,17 @@
 import React, { useRef, useState } from "react";
+import axios from "axios";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { HiOutlineVideoCamera } from "react-icons/hi";
 import { IoMdPhotos } from "react-icons/io";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { BsEmojiSmile } from "react-icons/bs";
-import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addPost } from "../../public/features/postSlice";
 
 type CreatePostProps = {};
 
-const FB_CLONE_ENDPOINT = process.env.FB_CLONE_ENDPOINT!;
+const FB_CLONE_ENDPOINT = "http://localhost:8080/api/v1/posts";
 
 const CreatePost: React.FC<CreatePostProps> = () => {
   const { data: session } = useSession();
@@ -42,7 +42,10 @@ const CreatePost: React.FC<CreatePostProps> = () => {
     event.preventDefault();
     if (!inputRef.current?.value) return;
     const formData = new FormData();
+
     formData.append("image", imageToPost);
+    console.log("imageToPost: " + imageToPost);
+
     formData.append("post", inputRef.current.value);
     formData.append("name", session!.user!.name!);
     formData.append("email", session!.user!.email!);
