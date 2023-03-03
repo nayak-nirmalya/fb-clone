@@ -1,15 +1,18 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Next.js Facebook Clone App!
+
 ## Getting Started
 
-First, run the development server:
+### Backend Using Java Spirng & MySQL Deployed At: [LINK](https://github.com/nayak-nirmalya/fb-clone-spring-boot-java)
 
-```bash
+`First Run Backend Code, Then Start Next.js Server.`
+
+### To Run the Project:
+
+```
+npm run install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
