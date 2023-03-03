@@ -22,7 +22,7 @@ const Posts: React.FC<PostsProps> = () => {
     } catch (error) {
       console.error(error);
     }
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>

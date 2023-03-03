@@ -14,7 +14,9 @@ const Post: React.FC<PostProps> = ({ post }) => {
     <div className="flex flex-col">
       <div className="bg-white mt-6 rounded-md p-4">
         <div className="flex items-center space-x-2">
-          <img
+          <Image
+            width={40}
+            height={40}
             src={
               post.profilePic
                 ? post.profilePic

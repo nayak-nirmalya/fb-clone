@@ -44,8 +44,6 @@ const CreatePost: React.FC<CreatePostProps> = () => {
     const formData = new FormData();
 
     formData.append("image", imageToPost);
-    console.log("imageToPost: " + imageToPost);
-
     formData.append("post", inputRef.current.value);
     formData.append("name", session!.user!.name!);
     formData.append("email", session!.user!.email!);
@@ -85,7 +83,13 @@ const CreatePost: React.FC<CreatePostProps> = () => {
       </div>
       {imageToPost && (
         <div className="flex items-center px-4 space-x-4 filter hover:brightness-110 transition duration-150 cursor-pointer">
-          <img src={imageToPost} className="h-10 object-contain" />
+          <Image
+            alt="ImageToPost"
+            src={imageToPost}
+            width={60}
+            height={60}
+            className="h-10 object-contain"
+          />
           <RiDeleteBin6Line
             onClick={removeImage}
             className="h-8 hover:text-red-600"
