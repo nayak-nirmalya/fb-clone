@@ -1,24 +1,35 @@
-import { createSlice } from "@reduxjs/toolkit/dist/createSlice";
+import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../app/store";
 
+// Define post schema
+export interface Post {
+  id: string;
+  name: string;
+  email: string;
+  post: string;
+  timeStamp: string;
+  image?: string;
+  profilePic?: string;
+}
+
 // Define a type for the slice state
 interface PostState {
-  value: number;
+  value: Post[];
 }
 
 // Define the initial state using that type
 const initialState: PostState = {
-  value: 0
+  value: []
 };
 
 export const postSlice = createSlice({
   name: "post",
-  initialState: {
-    value: []
-  },
+  initialState,
   reducers: {
-    addPost: (state, action: PayloadAction<number>) => {},
+    addPost: (state, action: PayloadAction<Post>) => {
+      state.value.push();
+    },
     addAllPost: (state, action) => {}
   }
 });

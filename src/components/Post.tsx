@@ -3,43 +3,49 @@ import Image from "next/image";
 import { FiThumbsUp } from "react-icons/fi";
 import { FaRegCommentAlt } from "react-icons/fa";
 import { RiShareForwardLine } from "react-icons/ri";
+import { Post } from "../../public/features/postSlice";
 
-type PostProps = {};
+type PostProps = {
+  post: Post;
+};
 
-const Post: React.FC<PostProps> = () => {
+const Post: React.FC<PostProps> = ({ post }) => {
   return (
     <div className="flex flex-col">
       <div className="bg-white mt-6 rounded-md p-4">
         <div className="flex items-center space-x-2">
           <img
-            src="https://www.freepnglogos.com/uploads/facebook-logo-icon/facebook-logo-icon-file-facebook-icon-svg-wikimedia-commons-4.png"
+            src={
+              post.profilePic
+                ? post.profilePic
+                : "https://www.freepnglogos.com/uploads/facebook-logo-icon/facebook-logo-icon-file-facebook-icon-svg-wikimedia-commons-4.png"
+            }
             alt="PostImage"
             className="rounded-full w-10 h-10"
           />
           <div>
-            <p className="font-medium">Nirmalya Nayak</p>
-            <p className="text-sm text-gray-500">
-              {new Date().getFullYear().toLocaleString()}
-            </p>
+            <p className="font-medium">{post.name}</p>
+            <p className="text-sm text-gray-500">{post.timeStamp}</p>
           </div>
         </div>
-        <p className="py-4">Lorem Ipsum</p>
+        <p className="py-4">{post.post}</p>
       </div>
       {/* Check for Image */}
-      <div className="relative h-60 md:h-96 bg-white">
-        <Image
-          src={
-            "https://thumbs.dreamstime.com/z/dog-travel-car-nova-scotia-duck-tolling-retriever-enjoying-road-trip-153545444.jpg"
-          }
-          alt="PostPicture"
-          priority
-          fill
-          style={{ objectFit: "cover" }}
-          sizes="(max-width: 768px) 100vw,
+
+      {post.image && (
+        <div className="relative h-60 md:h-96 bg-white">
+          <Image
+            src={post.image}
+            alt="PostPicture"
+            priority
+            fill
+            style={{ objectFit: "cover" }}
+            sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
               33vw"
-        />
-      </div>
+          />
+        </div>
+      )}
 
       {/* Footer */}
       <div className="flex items-center justify-center bg-white p-2">

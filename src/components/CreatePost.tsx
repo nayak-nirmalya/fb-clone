@@ -6,6 +6,8 @@ import { IoMdPhotos } from "react-icons/io";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { BsEmojiSmile } from "react-icons/bs";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addPost } from "../../public/features/postSlice";
 
 type CreatePostProps = {};
 
@@ -16,6 +18,7 @@ const CreatePost: React.FC<CreatePostProps> = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const [imageToPost, setImageToPost] = useState<string>("");
+  const dispatch = useDispatch();
 
   const handleClick = () => {
     hiddenFileInput.current!.click();
@@ -51,6 +54,7 @@ const CreatePost: React.FC<CreatePostProps> = () => {
       })
       .then((response) => {
         inputRef.current!.value = "";
+        dispatch(addPost(response.data));
         removeImage();
       })
       .catch((error) => console.error(error));
